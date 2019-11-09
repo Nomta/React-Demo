@@ -12,7 +12,8 @@ class Form extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleClick() {
+  handleClick(event) {
+    event.preventDefault();
     this.props.dispatch(addTweet(this.state.value));
     this.setState({value: ''});
   }
@@ -23,14 +24,14 @@ class Form extends Component {
   
   render() {
     return (
-      <div className="tweet" >
+      <form className="tweet">
         <input type="text"
           className="tweet-text" 
           maxLength="80" 
           value={this.state.value}
           onChange={this.handleChange} />
         <button className="page-button tweet-button" onClick={this.handleClick}>+</button>
-      </div>
+      </form>
     );
   }
 }
