@@ -1,0 +1,89 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+.page-container {
+  width: 64rem;
+  max-width: 98%;
+  min-height: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-main {
+  padding: 1.5em 0;
+  display: flex;
+}
+
+.page-footer {
+  min-height: 3em;
+  border-top: 1px solid #ccc;
+  margin-top: auto;
+}
+
+.page-button {
+  padding: 0.25em 0.5em;
+  font-size: 1.825em;
+  color: #aaa;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  transition: 0.3s all;
+}
+
+.page-button:hover {
+  color: #939393;
+  background-color: #f9f9f9;
+  border: 1px solid #c3c3c3;
+}
+
+.sidebar {
+  width: 20%;
+  min-width: 160px;
+}
+
+.avatar {
+  width: 100%;
+  content: '';
+  padding-bottom: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 1px solid #ccc;
+}
+
+.tweet-bar {
+  width: 100%;
+  padding: 0 1.5em;
+}
+
+.tweet-button, .tweet-button:hover {
+  border-left-width: 2px;
+}
+
+.tweet {
+  margin: 0;
+  margin-bottom: 0.5em;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  list-style-type: none;
+  display: flex;
+}
+
+.tweet-text {
+  padding: 1em;
+  border: none;
+  flex-grow: 1;
+}
