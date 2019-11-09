@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchTweets } from './../../actions/tweetActions';
+import Loader from './../../components/Loader';
 import TweetForm from './TweetForm';
 import TweetList from './TweetList';
 
@@ -12,8 +13,10 @@ class Tweets extends Component {
   render() {
     return (
       <div className="tweet-bar">
-        <TweetForm></TweetForm>
-        <TweetList tweets={this.props.tweets}></TweetList>
+        <Loader loading={this.props.loading}>
+          <TweetForm></TweetForm>
+          <TweetList tweets={this.props.tweets}></TweetList>
+        </Loader>
       </div>
     );
   }
@@ -21,7 +24,8 @@ class Tweets extends Component {
 
 function mapStateToProps(state) {
   return {
-    tweets: state.tweets.tweets
+    tweets: state.tweets.tweets,
+    loading: state.tweets.fetching
   }
 }
 
