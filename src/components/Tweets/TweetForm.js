@@ -1,37 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addTweet } from './../../actions/tweetActions';
+import Form from './../Form';
 
-class Form extends Component {
+class TweetForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      value: ''
-    }
-    this.handleClick = this.handleClick.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.dispatchValue = this.dispatchValue.bind(this);
   }
 
-  handleClick(event) {
-    event.preventDefault();
-    this.props.dispatch(addTweet(this.state.value));
-    this.setState({value: ''});
-  }
-
-  handleChange() {
-    this.setState({value: event.target.value});
+  dispatchValue(value) {
+    this.props.dispatch(addTweet(value));
   }
   
   render() {
     return (
-      <form className="tweet">
-        <input type="text"
-          className="tweet-text" 
-          maxLength="80" 
-          value={this.state.value}
-          onChange={this.handleChange} />
-        <button className="page-button tweet-button" onClick={this.handleClick}>+</button>
-      </form>
+      <Form action={ this.dispatchValue } maxLength="80"></Form>
     );
   }
 }
@@ -40,4 +24,4 @@ function mapStateToProps(state) {
   return {}
 }
 
-export default connect(mapStateToProps)(Form);
+export default connect(mapStateToProps)(TweetForm);

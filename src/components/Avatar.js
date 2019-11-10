@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Image from './main.jpg'
+import Image from './../assets/images/main.jpg'
 
 class Avatar extends Component {
   render() {

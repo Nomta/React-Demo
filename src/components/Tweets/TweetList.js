@@ -6,9 +6,9 @@ class TweetList extends Component {
   render() {
     const tweets =
       this.props.tweets && this.props.tweets.length
-        ? this.props.tweets.map(tweet => {
-          return <Tweet key={ tweet.id } id={ tweet.id }>{ tweet.text }</Tweet>
-        })
+        ? this.props.tweets.map(tweet => (
+          <Tweet key={ tweet.id } id={ tweet.id }>{ tweet.text }</Tweet>
+        ))
         : [];
   
     return (

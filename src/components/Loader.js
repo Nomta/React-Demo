@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 
 const dots = Array.from({ length: 4 }, (item, i) => (
   <div className="loader-el" key={i}></div>
@@ -21,6 +22,10 @@ class Loader extends Component {
       <Fragment>{ this.props.children }</Fragment>
     );
   }
+}
+
+Loader.propTypes = {
+  children: PropTypes.node.isRequired
 }
 
 export default Loader;

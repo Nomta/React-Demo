@@ -15,11 +15,11 @@ class Tweet extends Component {
   
   render() {
     return (
-      <li className="tweet">
-        <span className="tweet-text">
+      <li className="page-control">
+        <span className="control-text">
           {this.props.children}
         </span>
-        <button className="page-button tweet-button" onClick={this.handleClick}>
+        <button className="page-button control-button" onClick={this.handleClick}>
           &times;
         </button>
       </li>

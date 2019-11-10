@@ -85,19 +85,10 @@ ul {
 /* ----- END loader----- */
 
 .page-button {
-  padding: 0.25em 0.5em;
-  font-size: 1.825em;
-  color: #aaa;
-  background-color: #fff;
-  border: 1px solid #ccc;
   cursor: pointer;
   transition: 0.3s all;
-}
-
-.page-button:hover {
-  color: #939393;
-  background-color: #f9f9f9;
-  border: 1px solid #c3c3c3;
+  background-color: #fff;
+  border: 1px solid currentColor;
 }
 
 .sidebar {
@@ -119,11 +110,7 @@ ul {
   padding: 0 1.5em;
 }
 
-.tweet-button, .tweet-button:hover {
-  border-left-width: 2px;
-}
-
-.tweet {
+.page-control {
   margin: 0;
   margin-bottom: 0.5em;
   font-size: 1rem;
@@ -132,8 +119,53 @@ ul {
   display: flex;
 }
 
-.tweet-text {
+.control-button {
+  padding: 0.25em 0.5em;
+  font-size: 1.825em;
+  color: #aaa;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-left-width: 2px;
+}
+
+.control-button:hover {
+  color: #939393;
+  background-color: #f9f9f9;
+  border-color: #c3c3c3;
+}
+
+.control-text {
+  width: 100%;
   padding: 1em;
   border: none;
   flex-grow: 1;
+}
+
+.username {
+  font-size: 1.5rem;
+  vertical-align: bottom;
+  display: flex;
+  justify-content: space-between;
+  color: #939393;
+}
+
+.username-button {
+  width: 1.75rem;
+  height: 1.75rem;
+  /* opacity: 0; */
+  border: none;
+}
+
+/* .username:hover .username-button {
+  opacity: 1;
+} */
+
+.username-button .edit-icon {
+  position: relative;
+  left: -0.15em;
+}
+
+.icon {
+  font-size: 1em;
+  color: currentColor;
 }

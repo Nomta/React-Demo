@@ -1,5 +1,5 @@
 const initialState = {
-  user: { id: null, name: null },
+  user: { id: null, name: null, image: null },
   fetching: false, 
   fetched: false, 
   error: null
@@ -15,6 +15,8 @@ const reducer = function (state = initialState, action = {}) {
       return { ...state, fetching: false, fetched: true, user: action.payload }
     case 'SET_USER_NAME':
       return { ...state, user: { ...state.user, name: action.payload } }
+      case 'SET_USER_IMAGE':
+        return { ...state, user: { ...state.user, image: action.payload } }
     default: return state;
   }
 }
