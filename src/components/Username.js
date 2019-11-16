@@ -1,49 +1,77 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { fetchUser, setUserName } from './../actions/userActions';
-import Form from './../components/Form';
 import Icon from './../components/Icon';
+import Modal from './Modal/Modal';
 
 class Username extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      editable: false
-    }
-    this.handleClick = this.handleClick.bind(this);
+    this.state = { 
+      username: '',
+      editable: false 
+    };
+
+    this.changeValue = this.changeValue.bind(this);
     this.dispatchValue = this.dispatchValue.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
   
   componentDidMount() {
     this.props.dispatch(fetchUser());
   }
 
-  handleClick() {
+  changeValue(event) {
+    this.setState({ username: event.target.value });
+  }
+
+  dispatchValue() {
+    this.props.dispatch(setUserName(this.state.username));
+    this.closeModal();
+  }
+
+  openModal() {
     this.setState({ editable: true });
   }
 
-  dispatchValue(value) {
-    this.props.dispatch(setUserName(value));
+  closeModal() {
     this.setState({ editable: false });
   }
 
   render() {
+    const username = this.props.user && this.props.user.name;
+    const buttons = [
+      { id: 1, text: 'Да', handler: this.dispatchValue }, 
+      { id: 2, text: 'Нет', handler: 'close' }
+    ];
+
     return (
-      this.state.editable
-        ? <Form action={ this.dispatchValue } value={ this.props.name } maxLength="15"></Form>
-        : <h2 className="username">
-            <span>{ this.props.user && this.props.user.name || 'Без имени'}</span>
-            <button className="page-button username-button icon" onClick={this.handleClick}>
-              <span className="icon edit-icon">
-                <Icon name="edit-icon"/>
-              </span>
-            </button>
-          </h2>
+      <Fragment>
+        <h2 className="username">
+          <span>{ username || 'Без имени' }</span>
+          <button className="page-button username-button icon" onClick={ this.openModal }>
+            <span className="icon edit-icon">
+              <Icon name="edit-icon"/>
+            </span>
+          </button>
+        </h2>
+        <Modal display={this.state.editable} close={this.closeModal} buttons={buttons} title="Ваше имя">
+          <div className="page-control">
+            <input type="text"
+              autoFocus
+              defaultValue={ username }
+              onChange={this.changeValue } 
+              className="control-text" 
+              maxLength="15" />
+          </div>
+        </Modal>
+      </Fragment>
       );
   }
 }
 
-function mapStateToProps(state) { console.log('STATE',state.user)
+function mapStateToProps(state) {
   return {
     user: state.user.user
   }
