@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import ModalButton from './ModalButton';
 
 class Modal extends Component {
   render() { 
-    const buttons = this.props.buttons && this.props.buttons.map(button => {
-      const handler =
-        typeof button.handler === 'function'
-          ? button.handler
-          : this.props.close;
-      return (
-        <button key={ button.id } onClick={ handler } className="modal-button">
-            { button.text }
-        </button>
-      )
-    });
+    const buttons = this.props.buttons && this.props.buttons.map(button => (
+      <ModalButton key={ button.id } handler={ button.handler } close={ this.props.close }>
+        { button.text }
+      </ModalButton>
+    ));
     return (
       this.props.display
         ? <div>

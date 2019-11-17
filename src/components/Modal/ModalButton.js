@@ -2,15 +2,20 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class ModalButton extends Component {
+  constructor(props) {
+    super(props);
+    this.clickHandler = this.clickHandler.bind(this);
+  }
+  
   clickHandler() {
-    if (this.handler) {
+    if (this.props.handler && typeof this.props.handler === 'function') {
       this.props.handler();
     }
     this.props.close();
   }
   render() {
     return (
-      <button onClick={ this.props.clickHandler } className="modal-button">
+      <button onClick={ this.clickHandler } className="modal-button">
         {this.props.children}
       </button>
     );
@@ -18,7 +23,10 @@ class ModalButton extends Component {
 }
 
 ModalButton.propTypes = {
-  children: PropTypes.string.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.string.isRequired, 
+    PropTypes.number.isRequired
+  ]),
   handler: PropTypes.func,
   close: PropTypes.func.isRequired
 };

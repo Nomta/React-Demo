@@ -28,7 +28,7 @@ class Username extends Component {
 
   dispatchValue() {
     this.props.dispatch(setUserName(this.state.username));
-    this.closeModal();
+    // this.closeModal();
   }
 
   openModal() {
@@ -43,7 +43,7 @@ class Username extends Component {
     const username = this.props.user && this.props.user.name;
     const buttons = [
       { id: 1, text: 'Да', handler: this.dispatchValue }, 
-      { id: 2, text: 'Нет', handler: 'close' }
+      { id: 2, text: 'Нет' }
     ];
 
     return (
