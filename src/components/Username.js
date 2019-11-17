@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchUser, setUserName } from './../actions/userActions';
 import Icon from './../components/Icon';
 import Modal from './Modal/Modal';
+import Loader from './../components/Loader';
 
 class Username extends Component {
   constructor(props) {
@@ -48,12 +49,14 @@ class Username extends Component {
     return (
       <Fragment>
         <h2 className="username">
-          <span className="username-text">{ username || 'Без имени' }</span>
-          <button className="page-button username-button icon" onClick={ this.openModal }>
-            <span className="icon edit-icon">
-              <Icon name="edit-icon"/>
-            </span>
-          </button>
+          <Loader loading={this.props.loading}>
+            <span className="username-text">{ username || 'Без имени' }</span>
+            <button className="page-button username-button icon" onClick={ this.openModal }>
+              <span className="icon edit-icon">
+                <Icon name="edit-icon"/>
+              </span>
+              </button>
+          </Loader>
         </h2>
         <Modal display={ this.state.editable } close={ this.closeModal } buttons={ buttons } title="Ваше имя">
           <div className="page-control">
@@ -72,7 +75,8 @@ class Username extends Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.user.user
+    user: state.user.user,
+    loading: state.user.fetching
   }
 }
 

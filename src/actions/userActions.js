@@ -17,12 +17,14 @@ export function fetchUser() {
 
 export function setUserName(name) {
   return function(dispatch) {
+    dispatch({ type: 'SET_USER_NAME' });
+
     axios.delete(url).then(() => {
         axios.post(url, { name })
-          .then(response => dispatch({ type: 'SET_USER_NAME', payload: name, }))
-        }).catch(err => console.err(err));
+          .then(response => dispatch({ type: 'SET_USER_NAME_FULFILLED', payload: name, }))
+        })
+        .catch(err => dispatch({ type: 'SET_USER_NAME_REJECTED', payload: err }));
   }
-  // return { type: 'SET_USER_NAME', payload: name, }
 }
 
 export function setUserImage(image) {

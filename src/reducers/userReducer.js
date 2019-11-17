@@ -1,5 +1,6 @@
 const initialState = {
   user: { id: null, name: null, image: null },
+  prevUser: { id: null, name: null, image: null },
   fetching: false, 
   fetched: false, 
   error: null
@@ -14,7 +15,11 @@ const reducer = function (state = initialState, action = {}) {
     case 'FETCH_USER_FULFILLED':
       return { ...state, fetching: false, fetched: true, user: action.payload }
     case 'SET_USER_NAME':
-      return { ...state, user: { ...state.user, name: action.payload } }
+      return { ...state, fetching: true, fetched: false, prevUser: state.user, user: { ...state.user, name: '' } }
+    case 'SET_USER_NAME_REJECTED':
+      return { ...state, user: state.prevUser, fetching: false, error: action.payload }
+    case 'SET_USER_NAME_FULFILLED':
+      return { ...state, fetching: false, fetched: true, user: { ...state.user, name: action.payload } }
     case 'SET_USER_IMAGE':
       return { ...state, user: { ...state.user, image: action.payload } }
   default: return state;
