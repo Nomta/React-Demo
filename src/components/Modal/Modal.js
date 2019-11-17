@@ -28,9 +28,9 @@ class Modal extends Component {
 Modal.propTypes = {
   children: PropTypes.node.isRequired,
   title: PropTypes.string,
-  buttons: PropTypes.array,
   display: PropTypes.bool,
-  close: PropTypes.func
+  close: PropTypes.func.isRequired,
+  buttons: PropTypes.arrayOf(PropTypes.object)
 }
 
 export default Modal;

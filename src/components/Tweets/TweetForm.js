@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addTweet } from './../../actions/tweetActions';
-import Form from './../Form';
+import Form from './../Form/Form';
 
 class TweetForm extends Component {
   constructor(props) {
@@ -10,7 +10,9 @@ class TweetForm extends Component {
   }
 
   dispatchValue(value) {
-    this.props.dispatch(addTweet(value));
+    if (value) {
+      this.props.dispatch(addTweet(value));
+    }
   }
   
   render() {

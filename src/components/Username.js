@@ -28,7 +28,6 @@ class Username extends Component {
 
   dispatchValue() {
     this.props.dispatch(setUserName(this.state.username));
-    // this.closeModal();
   }
 
   openModal() {
@@ -49,19 +48,19 @@ class Username extends Component {
     return (
       <Fragment>
         <h2 className="username">
-          <span>{ username || 'Без имени' }</span>
+          <span className="username-text">{ username || 'Без имени' }</span>
           <button className="page-button username-button icon" onClick={ this.openModal }>
             <span className="icon edit-icon">
               <Icon name="edit-icon"/>
             </span>
           </button>
         </h2>
-        <Modal display={this.state.editable} close={this.closeModal} buttons={buttons} title="Ваше имя">
+        <Modal display={ this.state.editable } close={ this.closeModal } buttons={ buttons } title="Ваше имя">
           <div className="page-control">
             <input type="text"
               autoFocus
               defaultValue={ username }
-              onChange={this.changeValue } 
+              onChange={ this.changeValue } 
               className="control-text" 
               maxLength="15" />
           </div>

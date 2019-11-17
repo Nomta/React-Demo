@@ -16,7 +16,7 @@ class ModalButton extends Component {
   render() {
     return (
       <button onClick={ this.clickHandler } className="modal-button">
-        {this.props.children}
+        { this.props.children }
       </button>
     );
   }
