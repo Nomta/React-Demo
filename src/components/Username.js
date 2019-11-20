@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { fetchUser, setUserName } from './../actions/userActions';
 import Icon from './../components/Icon';
-import Modal from './Modal/Modal';
+import Dialog from './Modal/Dialog';
 import Loader from './../components/Loader';
 
 class Username extends Component {
@@ -41,10 +41,6 @@ class Username extends Component {
 
   render() {
     const username = this.props.user && this.props.user.name;
-    const buttons = [
-      { id: 1, text: 'Да', handler: this.dispatchValue }, 
-      { id: 2, text: 'Нет' }
-    ];
 
     return (
       <Fragment>
@@ -58,16 +54,15 @@ class Username extends Component {
               </button>
           </Loader>
         </h2>
-        <Modal display={ this.state.editable } close={ this.closeModal } buttons={ buttons } title="Ваше имя">
-          <div className="page-control">
-            <input type="text"
-              autoFocus
-              defaultValue={ username }
-              onChange={ this.changeValue } 
-              className="control-text" 
-              maxLength="15" />
-          </div>
-        </Modal>
+        <Dialog 
+          display={ this.state.editable } 
+          close={ this.closeModal } 
+          confirm={ this.dispatchValue } 
+          handleChange={ this.changeValue } 
+          defaultValue={ username }
+          title="Ваше имя" 
+          maxLength="15" >
+        </Dialog>
       </Fragment>
       );
   }

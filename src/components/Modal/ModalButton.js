@@ -4,18 +4,18 @@ import PropTypes from 'prop-types';
 class ModalButton extends Component {
   constructor(props) {
     super(props);
-    this.clickHandler = this.clickHandler.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
   
-  clickHandler() {
-    if (this.props.handler && typeof this.props.handler === 'function') {
-      this.props.handler();
+  handleClick() {
+    if (this.props.handleClick && typeof this.props.handleClick === 'function') {
+      this.props.handleClick();
     }
     this.props.close();
   }
   render() {
     return (
-      <button onClick={ this.clickHandler } className="modal-button">
+      <button onClick={ this.handleClick } className="modal-button">
         { this.props.children }
       </button>
     );
@@ -27,7 +27,7 @@ ModalButton.propTypes = {
     PropTypes.string.isRequired, 
     PropTypes.number.isRequired
   ]),
-  handler: PropTypes.func,
+  handleClick: PropTypes.func,
   close: PropTypes.func.isRequired
 };
 

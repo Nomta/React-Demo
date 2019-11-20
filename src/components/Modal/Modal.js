@@ -1,25 +1,28 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import ModalButton from './ModalButton';
 
 class Modal extends Component {
   render() { 
     const buttons = this.props.buttons && this.props.buttons.map(button => (
-      <ModalButton key={ button.id } handler={ button.handler } close={ this.props.close }>
+      <ModalButton key={ button.id } handleClick={ button.handleClick } close={ this.props.close }>
         { button.text }
       </ModalButton>
     ));
     return (
       this.props.display
-        ? <div>
+        ? <Fragment>
             <div className="modal-layer" onClick={ this.props.close }></div>
             <div className="modal">
-              { this.props.title && <h4 className="modal-title">{ this.props.title }</h4> }
+              { this.props.title && <h3 className="modal-title">
+                { this.props.icon }
+                { this.props.title }
+              </h3> }
               { this.props.children }
               { buttons && <div className="modal-buttons">{ buttons }</div> }
               <span className="close-icon" onClick={ this.props.close }>&times;</span>
             </div>
-          </div>
+          </Fragment>
         : null
     );
   }
@@ -28,7 +31,8 @@ class Modal extends Component {
 Modal.propTypes = {
   children: PropTypes.node.isRequired,
   title: PropTypes.string,
-  display: PropTypes.bool,
+  icon: PropTypes.node,
+  display: PropTypes.bool.isRequired,
   close: PropTypes.func.isRequired,
   buttons: PropTypes.arrayOf(PropTypes.object)
 }
