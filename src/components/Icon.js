@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Icon = props => {
-  const { width, height, viewBox } = props;
+  const { width = props.size, height = props.size, viewBox, color } = props;
   const url = '#' + props.name;
   
   return (
-    <svg viewBox={ viewBox } width={ width } height={ height }>
+    <svg viewBox={ viewBox } width={ width } height={ height } fill={ color }>
       <use xlinkHref={ url }></use>
     </svg>
   );
@@ -22,13 +22,18 @@ Icon.propTypes = {
     PropTypes.number, 
     PropTypes.string
   ]),
-  viewBox: PropTypes.string
+  size: PropTypes.oneOfType([
+    PropTypes.number, 
+    PropTypes.string
+  ]),
+  viewBox: PropTypes.string,
+  color: PropTypes.string
 };
 
 Icon.defaultProps = {
-  width: '1em',
-  height: '1em',
-  viewBox: '0 0 64 64'
+  size: '1em',
+  viewBox: '0 0 64 64',
+  color: 'currentColor'
 }
 
 export default Icon;
