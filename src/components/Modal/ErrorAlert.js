@@ -6,8 +6,7 @@ import Alert from './Alert';
 const ErrorAlert = props => {
   const { display, close, title, confirmText } = props;
   return (
-    <Alert display={display} close={close} confirmText={confirmText} title={title}
-      icon={<Icon name="error-icon" size="1.4em" color="red" />}>
+    <Alert {...props} icon={ <Icon name="error-icon" size="1.4em" color="red"/> }>
         { props.children }
     </Alert>
   );

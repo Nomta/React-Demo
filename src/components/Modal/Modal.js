@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ModalButton from './ModalButton';
 
@@ -11,9 +11,8 @@ class Modal extends Component {
     ));
     return (
       this.props.display
-        ? <Fragment>
-            <div className="modal-layer" onClick={ this.props.close }></div>
-            <div className="modal">
+        ? <div className="modal-layer" onClick={ this.props.close }>
+            <div className="modal" onClick={ event => event.stopPropagation() }>
               { this.props.title && <h3 className="modal-title">
                 { this.props.icon }
                 { this.props.title }
@@ -22,7 +21,7 @@ class Modal extends Component {
               { buttons && <div className="modal-buttons">{ buttons }</div> }
               <span className="close-icon" onClick={ this.props.close }>&times;</span>
             </div>
-          </Fragment>
+          </div>
         : null
     );
   }

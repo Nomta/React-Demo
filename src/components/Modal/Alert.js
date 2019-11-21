@@ -4,9 +4,8 @@ import Modal from './Modal';
 
 const Alert = props => {
   const buttons = [{ id: 1, text: props.confirmText }];
-  const { display, close, title, icon } = props;
   return (
-    <Modal display={ display } close={ close } buttons={ buttons } title={ title } icon={ icon }>
+    <Modal buttons={ buttons } {...props}>
         { props.children }
     </Modal>
   );

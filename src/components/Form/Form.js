@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Input from './Input'
 
 class Form extends Component {
   constructor(props) {
@@ -17,19 +18,27 @@ class Form extends Component {
     this.setState({value: ''});
   }
 
-  handleChange() {
-    this.setState({value: event.target.value});
+  handleChange(value) {
+    this.setState({ value });
   }
   
   render() {
+    const attrs = {
+      value: this.state.value,
+      maxLength: this.props.maxLength,
+      className: "control-text control-text-plus",
+      autoFocus: true
+    }
     return (
       <form className="page-control">
-        <input type="text"
+        <Input attrs={ attrs } 
+          handleChange={this.handleChange}/>
+        {/* <input type="text"
           autoFocus
-          className="control-text" 
+          className="control-text control-text-plus" 
           value={this.state.value}
           maxLength={this.props.maxLength} 
-          onChange={this.handleChange} />
+          onChange={this.handleChange} /> */}
         <button className="page-button control-button" onClick={this.handleClick}>+</button>
       </form>
     );

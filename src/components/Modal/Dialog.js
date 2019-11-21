@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Confirm from './Confirm';
+import Input from './../Form/Input'
 
 class Dialog extends Component {
   render() {
-    const { display, close, confirm, title, confirmText, cancelText, defaultValue, handleChange, maxLength } = this.props;
+    const { value, confirm, handleChange, maxLength, ...props } = this.props;
+    const attrs = { value, maxLength, className: "control-text", autoFocus: true }
     return (
-      <Confirm display={ display } close={ close } confirm={ confirm } title={ title } confirmText={ confirmText } cancelText={ cancelText }>
+      <Confirm confirm={ confirm } { ...props }>
         { this.props.children }
         <div className="page-control dialog-control">
-          <input type="text" autoFocus
-            className="control-text" 
-            defaultValue={ defaultValue }
-            onChange={ handleChange } 
-            maxLength={ maxLength }/>
+          <Input
+            handleChange={ handleChange } 
+            handleSubmit={ confirm }
+            attrs={ attrs }/>
         </div>
       </Confirm>
     );
@@ -24,12 +25,13 @@ Dialog.propTypes = {
   children: PropTypes.string,
   display: PropTypes.bool,
   confirm: PropTypes.func.isRequired,
+  cancel: PropTypes.func,
   close: PropTypes.func.isRequired,
   handleChange: PropTypes.func,
   title: PropTypes.string,
   confirmText: PropTypes.string,
   cancelText: PropTypes.string,
-  defaultValue: PropTypes.string,
+  value: PropTypes.string,
   maxLength: PropTypes.oneOfType([
     PropTypes.number, 
     PropTypes.string

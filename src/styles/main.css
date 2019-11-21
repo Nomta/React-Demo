@@ -97,25 +97,6 @@ button {
   border: 1px solid currentColor;
 }
 
-.sidebar {
-  width: 20%;
-  min-width: 160px;
-}
-
-.avatar {
-  width: 100%;
-  content: '';
-  padding-bottom: 100%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  border: 1px solid #ccc;
-}
-
-.tweet-bar {
-  width: 100%;
-  padding: 0 1.5em;
-}
-
 .page-control {
   max-width: 100%;
   margin: 0;
@@ -137,13 +118,13 @@ button {
   color: currentColor;
 }
 
-.control-text:not(:last-child) {
-  max-width: calc(100% - 3.5em);
-}
-
 .control-text:focus {
   /* background-color: rgba(24,144,240,0.04); */
   outline: none;
+}
+
+.control-text-plus {
+  max-width: calc(100% - 3.5em);
 }
 
 .control-button {
@@ -154,6 +135,7 @@ button {
   background-color: #fff;
   border: 1px solid #ccc;
   border-left-width: 2px;
+  cursor: pointer;
 }
 
 .control-button:hover {
@@ -162,9 +144,137 @@ button {
   border-color: #c3c3c3;
 }
 
+.control-edit-button {
+  margin-left: auto;
+  margin-right: 0.7em;
+  padding: 0;
+  font-size: 1.4em;
+  align-self: center;
+  color: #aaa;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.icon {
+  font-size: 1em;
+  color: currentColor;
+}
+
+.edit-icon {
+  position: relative;
+  top: 0.125em;
+}
+
+/* ----- modal ----- */
+
+.modal-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal {
+  min-width: 20rem;
+  min-height: 3rem;
+  position: relative;
+  padding: 1em;
+  border-radius: 3px;
+  font-size: 0.9rem;
+  font-weight: normal;
+  color: #393939;
+  background-color: #fff;
+}
+
+.modal-title {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  display: flex;
+  justify-content: center;
+}
+
+.modal-title-icon {
+  margin-right: auto;
+}
+
+.modal .modal-buttons {
+  margin-top: 0.5em;
+  display: flex;
+  justify-content: center;
+}
+
+.modal .modal-button {
+  margin: 0 0.25em;
+  padding: 0.5em 1.5em;
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  cursor: pointer;
+  color: #fff;
+  background-color: #005090;
+  transition: 0.3s background-color;
+}
+
+.modal .modal-button:hover {
+  background-color: #1060a0;
+}
+
+.modal .close-icon {
+  position: absolute;
+  top: 0;
+  right: 0.25em;
+  font-size: 1.5rem;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.dialog-control {
+  width: 22em;
+  margin: 0.75em 0;
+}
+
+/* ----- END modal ----- */
+
+.sidebar {
+  width: 20%;
+  min-width: 160px;
+}
+
+.avatar {
+  width: 100%;
+  content: '';
+  padding-bottom: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: 1px solid #ccc;
+}
+
+.tweet-bar {
+  width: 100%;
+  padding: 0 1.5em;
+}
+
+.tweet-confirm {
+  padding: 0.5em;
+  padding-bottom: 0;
+  text-align: center;
+}
+
+.tweet-edit-button {
+  color: #939393;
+  margin-right: 0.5em;
+}
+
 .username {
   max-width: 100%;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   vertical-align: bottom;
   display: flex;
   justify-content: space-between;
@@ -198,76 +308,8 @@ button {
   left: -0.15em;
 }
 
-.icon {
-  font-size: 1em;
-  color: currentColor;
-}
-
-/* ----- modal ----- */
-
-.modal, .modal-layer {
-  position: fixed;
-}
-
-.modal-layer {
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.modal {
-  top: 50%;
-  left: 50%;
-  min-width: 20em;
-  min-height: 3em;
-  padding: 1em;
-  border-radius: 3px;
-  font-size: 0.9em;
-  transform: translate(-50%, -50%);
-  color: #393939;
-  background-color: #fff;
-}
-
-.modal-title {
-  margin-top: 0;
-  margin-bottom: 0.5em;
-  display: flex;
-}
-
-.modal .modal-buttons {
-  margin-top: 1.5em;
-  display: flex;
-  justify-content: center;
-}
-
-.modal .modal-button {
-  margin: 0 0.25em;
-  padding: 0.5em 1.5em;
+.modal-editor-button {
+  padding-left: 0;
+  padding-right: 0;
   border: none;
-  outline: none;
-  border-radius: 3px;
-  cursor: pointer;
-  color: #fff;
-  background-color: #005090;
-  transition: 0.3s background-color;
 }
-
-.modal .modal-button:hover {
-  background-color: #1060a0;
-}
-
-.modal .close-icon {
-  position: absolute;
-  top: 0;
-  right: 0.25em;
-  font-size: 1.5em;
-  cursor: pointer;
-}
-
-.dialog-control {
-  margin: 0.5em 0;
-}
-
-/* ----- END modal ----- */

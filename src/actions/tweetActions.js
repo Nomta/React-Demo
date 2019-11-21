@@ -26,11 +26,17 @@ export function addTweet(text) {
 }
 
 export function updateTweet(text, id) {
-  return { type: 'UPDATE_TWEET', payload: { id, text } }
+  return function (dispatch) {
+    dispatch({ type: 'UPDATE_TWEET', payload: {text, id} });
+
+    axios.put(getUrl(id), { text })
+    .then(response => dispatch({ type: 'UPDATE_TWEET_FULFILLED', payload: {text, id} }))
+    .catch(err => dispatch({ type: 'UPDATE_TWEET_REJECTED', payload: err }));
+  }
 }
 
 export function deleteTweet(id) {
-  return function (dispatch) {console.log(8889,getUrl(id))
+  return function (dispatch) {
     axios.delete(getUrl(id))
     .then(response => dispatch({ type: 'DELETE_TWEET', payload: id }))
     .catch(err => console.err(err));
