@@ -4,22 +4,32 @@ import { connect } from 'react-redux';
 import { updateTweet, deleteTweet } from './../../actions/tweetActions';
 import ModalEditor from './../ModalEditor/ModalEditor';
 import EditorConfirm from './../ModalEditor/EditorConfirm';
+import ErrorAlert from './../Modal/ErrorAlert';
 
 class Tweet extends Component {
   constructor(props) {
     super(props);
+    this.state = { error: false }
     this.changeValue = this.changeValue.bind(this);
     this.deleteValue = this.deleteValue.bind(this);
+    this.errorMessageClose = this.errorMessageClose.bind(this);
   }
 
   changeValue(value) {
     if (value) {
       this.props.dispatch(updateTweet(value, this.props.id));
     }
+    else {
+      this.setState({ error: true });
+    }
   }
 
   deleteValue() {
     this.props.dispatch(deleteTweet(this.props.id));
+  }
+
+  errorMessageClose() {
+    this.setState({ error: false });
   }
   
   render() {
@@ -51,6 +61,9 @@ class Tweet extends Component {
             </div>
           </EditorConfirm>
         </li>
+        <ErrorAlert display={ this.state.error } close={ this.errorMessageClose }>
+          Заметка не должна быть пустой.
+        </ErrorAlert>
       </Fragment>
     );
   }

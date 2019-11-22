@@ -1,5 +1,5 @@
 const initialState = {
-  tweets: [], prevTweets: [], fetching: false, fetched: false, error: null
+  tweets: [], fetching: false, error: null, errorRead: false
 }
 
 const reducer = function (state = initialState, action = {}) {
@@ -7,24 +7,34 @@ const reducer = function (state = initialState, action = {}) {
     case 'FETCH_TWEETS': 
       return { ...state, fetching: true }
     case 'FETCH_TWEETS_REJECTED': 
-      return { ...state, fetching: false, error: action.payload }
+      return { ...state, fetching: false, error: action.payload, errorRead: false }
     case 'FETCH_TWEETS_FULFILLED': 
-      return { ...state, fetching: false, fetched: true, tweets: action.payload }
+      return { ...state, fetching: false, tweets: action.payload }
     case 'ADD_TWEET':
-      return { ...state, tweets: [ ...state.tweets, action.payload ] }
-    case 'UPDATE_TWEET': {
+      return { ...state, fetching: true }
+    case 'ADD_TWEET_REJECTED': 
+      return { ...state, fetching: false, error: action.payload, errorRead: false }
+    case 'ADD_TWEET_FULFILLED': 
+      return { ...state, tweets: [ ...state.tweets, action.payload ], fetching: false }
+    case 'UPDATE_TWEET': 
+      return { ...state, fetching: true }
+    case 'UPDATE_TWEET_REJECTED': 
+      return { ...state, fetching: false, error: action.payload, errorRead: false }
+    case 'UPDATE_TWEET_FULFILLED': {
       const tweets = state.tweets;
       const index = tweets.findIndex(tweet => tweet.id === action.payload.id);
       
       tweets[index] = action.payload;
-      return { ...state, prevTweets: state.tweets, fetching: true, tweets }
+      return { ...state, fetching: false, tweets }
     }
-    case 'UPDATE_TWEET_REJECTED': 
-      return { ...state, tweets: state.prevTweets, fetching: false, error: action.payload }
-    case 'UPDATE_TWEET_FULFILLED': 
-      return { ...state, fetching: false, fetched: true }
     case 'DELETE_TWEET': 
-      return { ...state, tweets: state.tweets.filter(tweet => tweet.id !== action.payload) }
+      return { ...state, fetching: true }
+    case 'DELETE_TWEET_REJECTED': 
+      return { ...state, fetching: false, error: action.payload, errorRead: false }
+    case 'DELETE_TWEET_FULFILLED': 
+      return { ...state, tweets: state.tweets.filter(tweet => tweet.id !== action.payload), fetching: false }
+    case 'SET_TWEET_ERROR_STATUS_READ':
+      return { ...state, errorRead: true }
     default: return state;
   }
 }

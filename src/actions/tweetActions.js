@@ -19,9 +19,11 @@ export function fetchTweets() {
 
 export function addTweet(text) {
   return function (dispatch) {
+    dispatch({ type: 'ADD_TWEET' });
+
     axios.post(getUrl(), { text })
-      .then(response => dispatch({ type: 'ADD_TWEET', payload: { id: response.data.name, text } }))
-      .catch(err => console.err(err));
+      .then(response => dispatch({ type: 'ADD_TWEET_FULFILLED', payload: { id: response.data.name, text } }))
+      .catch(err => dispatch({ type: 'ADD_TWEET_REJECTED', payload: err }));
   }
 }
 
@@ -37,8 +39,14 @@ export function updateTweet(text, id) {
 
 export function deleteTweet(id) {
   return function (dispatch) {
+    dispatch({ type: 'DELETE_TWEET' });
+
     axios.delete(getUrl(id))
-    .then(response => dispatch({ type: 'DELETE_TWEET', payload: id }))
-    .catch(err => console.err(err));
+    .then(response => dispatch({ type: 'DELETE_TWEET_FULFILLED', payload: id }))
+    .catch(err => dispatch({ type: 'DELETE_TWEET_REJECTED', payload: err }));
   }
+}
+
+export function setErrorReadStatus() {
+  return { type: 'SET_TWEET_ERROR_STATUS_READ' }
 }

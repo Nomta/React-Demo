@@ -28,5 +28,9 @@ export function setUserName(name) {
 }
 
 export function setUserImage(image) {
-  return { type: 'SET_USER_IMAGE', payload: image, }
+  return { type: 'SET_USER_IMAGE', payload: image }
+}
+
+export function setErrorReadStatus() {
+  return { type: 'SET_USER_ERROR_STATUS_READ' }
 }
