@@ -28,9 +28,7 @@ class Input extends Component {
     return (
       <Fragment>
         <input type="text" onChange={this.handleChange} onKeyPress={this.handleSubmit} {...attrs}/>
-          <span className="control-edit-button" onClick={ this.resetValue }>
-            &times;
-          </span>
+        <span className="control-edit-button" onClick={ this.resetValue }>&times;</span>
       </Fragment>
     );
   }
